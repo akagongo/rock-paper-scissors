@@ -29,6 +29,16 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function showFinalResult(playerScr, computerScr) {
+    if (playerScr > computerScr) {
+        alert("Congrats! You defeated the machine");
+    } else if (playerScr < computerScr) {
+        alert("Bad luck! Maybe next time");
+    } else {
+        alert("It's a draw");
+    }
+}
+
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -46,13 +56,7 @@ function game() {
         }
     }
 
-    if (playerScore > computerScore) {
-        alert("Congrats! You defeated the machine");
-    } else if (playerScore < computerScore) {
-        alert("Bad luck! Maybe next time");
-    } else {
-        alert("It's a draw");
-    }
+    showFinalResult(playerScore, computerScore);
 }
 
 game()
