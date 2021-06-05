@@ -9,7 +9,6 @@ crate a function that keeps track of results and declare a winner
 function computerPlay() {
     var choiceArray = ["rock", "paper", "scissors"];
     var randomIndex = Math.floor(Math.random()*choiceArray.length);
-    console.log(choiceArray[randomIndex]);
     return  choiceArray[randomIndex];
 }
 
@@ -42,6 +41,8 @@ function game() {
         } else if (result.toLowerCase().includes("lost")) {
             computerScore += 1;
             alert(`You lost. The global score is: You ${playerScore} - ${computerScore} Machine`)
+        } else {
+            alert(`It's a draw. The global score is: You ${playerScore} - ${computerScore} Machine`)
         }
     }
 
@@ -54,3 +55,4 @@ function game() {
     }
 }
 
+game()
