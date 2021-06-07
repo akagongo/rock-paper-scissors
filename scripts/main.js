@@ -6,57 +6,47 @@ create a function to play a round of the game
 crate a function that keeps track of results and declare a winner
 */
 
+const btnChoice = document.querySelectorAll(".button");
+const paraResult =  document.querySelector("#current-result");
+const paraScore = document.querySelector("#score");
+let playerScore = 0;
+let computerScore = 0;
+
+btnChoice.forEach((btn) => {
+    btn.addEventListener("click", playRound);
+})
+
 function computerPlay() {
     var choiceArray = ["rock", "paper", "scissors"];
     var randomIndex = Math.floor(Math.random()*choiceArray.length);
     return  choiceArray[randomIndex];
 }
 
-function playerPlay() {
-    var playerChoice = prompt("Choose rock, paper or scissors").toLowerCase();
-    return playerChoice;
-}
 
-function playRound(playerSelection, computerSelection) {
+function playRound(e) {
+
+    if (playerScore === 5) {
+        paraResult.textContent = "Congrats! You defeated the machine";
+        return true;
+    } else if (computerScore == 5) {
+        paraResult.textContent = "Bad luck! Maybe next time";
+        return true;
+    }
+
+    playerSelection = e.target["id"]
+    computerSelection = computerPlay()
+
     if (playerSelection == computerSelection) {
-        return("Draw");
+        paraResult.textContent = "It's a draw. The global score is:";
+        paraScore.textContent = ""
     } else if ((playerSelection == "rock" && computerSelection == "scissors") ||  
-    (playerSelection == "paper" && computerSelection == "rock") || 
-    (playerSelection == "scissors" && computerSelection == "paper")) {
-        return("You won");
+        (playerSelection == "paper" && computerSelection == "rock") || 
+        (playerSelection == "scissors" && computerSelection == "paper")) {
+        paraResult.textContent = "You won. The global score is:";
+        playerScore += 1;
     } else {
-        return("You lost");
+        paraResult.textContent = "You lost. The global score is:";
+        computerScore += 1;
     }
+        paraScore.textContent = `${playerScore} - ${computerScore}`;
 }
-
-function showFinalResult(playerScr, computerScr) {
-    if (playerScr > computerScr) {
-        alert("Congrats! You defeated the machine");
-    } else if (playerScr < computerScr) {
-        alert("Bad luck! Maybe next time");
-    } else {
-        alert("It's a draw");
-    }
-}
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (i = 0; i < 5; i++) {
-        result = playRound(playerPlay(), computerPlay());
-        if (result.toLowerCase().includes("won")) {
-            playerScore += 1;
-            alert(`You won. The global score is: You ${playerScore} - ${computerScore} Machine`)
-        } else if (result.toLowerCase().includes("lost")) {
-            computerScore += 1;
-            alert(`You lost. The global score is: You ${playerScore} - ${computerScore} Machine`)
-        } else {
-            alert(`It's a draw. The global score is: You ${playerScore} - ${computerScore} Machine`)
-        }
-    }
-
-    showFinalResult(playerScore, computerScore);
-}
-
-game()
