@@ -1,0 +1,18 @@
+#buttons {
+    text-align: center;
+    padding-top: 10%;
+}
+
+.button {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 8em;
+}
+
+h1, p {
+    text-align: center;
+}
+
+#score {
+    font-size: 5em;
+}
